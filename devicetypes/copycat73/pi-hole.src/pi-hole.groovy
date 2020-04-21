@@ -128,7 +128,9 @@ def parse(response) {
     	sendEvent(name: "switch", value: "off")
     }
     if (json.dns_queries_today.toInteger() >= 0) {
-    	def combinedValue = "Queries today: " +json.dns_queries_today + " Blocked: " + json.ads_blocked_today + "\nClients: " + json.unique_clients
+    	def combinedValue = "Queries today: " + json.dns_queries_today +
+                            " Blocked: " + json.ads_blocked_today +
+                            "\nClients: " + json.unique_clients
 		sendEvent(name: "combined", value: combinedValue, unit: "")
     } 	
     
