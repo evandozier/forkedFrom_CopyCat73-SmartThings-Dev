@@ -128,14 +128,26 @@ def parse(response) {
     	sendEvent(name: "switch", value: "off")
     }
     if (json.dns_queries_today.toInteger() >= 0) {
-    	sendEvent(name: "queries", value: json.dns_queries_today.toInteger(), unit: "")
-         
         def combinedValue = "Queries today: " + json.dns_queries_today +
                             " Blocked: " + json.ads_blocked_today +
                             "\nClients: " + json.unique_clients
 		sendEvent(name: "combined", value: combinedValue, unit: "")
     } 	
-    
+    sendEvent(name: "dns_queries_today", value: json.dns_queries_today.toInteger(), unit: "")
+    sendEvent(name: "domains_being_blocked", value: json.domains_being_blocked.toInteger(), unit: "")
+    sendEvent(name: "ads_blocked_today", value: json.ads_blocked_today.toInteger(), unit: "")
+    sendEvent(name: "ads_percentage_today", value: json.ads_percentage_today.toFloat(), unit: "")
+    sendEvent(name: "unique_domains", value: json.unique_domains.toInteger(), unit: "")
+    sendEvent(name: "queries_forwarded", value: json.queries_forwarded.toInteger(), unit: "")
+    sendEvent(name: "queries_cached", value: json.queries_cached.toInteger(), unit: "")
+    sendEvent(name: "clients_ever_seen", value: json.clients_ever_seen.toInteger(), unit: "")
+    sendEvent(name: "unique_clients", value: json.unique_clients.toInteger(), unit: "")
+    sendEvent(name: "dns_queries_all_types", value: json.dns_queries_all_types.toInteger(), unit: "")
+    sendEvent(name: "reply_NODATA", value: json.reply_NODATA.toInteger(), unit: "")
+    sendEvent(name: "reply_NXDOMAIN", value: json.reply_NXDOMAIN.toInteger(), unit: "")
+    sendEvent(name: "reply_CNAME", value: json.reply_CNAME.toInteger(), unit: "")
+    sendEvent(name: "reply_IP", value: json.reply_IP.toInteger(), unit: "")
+
     sendEvent(name: 'lastupdate', value: lastUpdated(now()), unit: "")
    
 }
